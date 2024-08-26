@@ -1,21 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const productRoute = require('./routes/product.route');
 const PORT = 3200;
+const uri ='mongodb+srv://prashinjigneshparikh:neeta1970@backenddb.aqu0j.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB';
+
 const app = express();
+
+// middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-const uri =
-  'mongodb+srv://prashinjigneshparikh:neeta1970@backenddb.aqu0j.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB';
+// routes
+app.use('/api/v1/products', productRoute);
 
+// Route to the Home page
 app.get('/', (req, res, next) => {
-  console.log('Served a GET request');
-  res.send('<h1>Hello from Node API</h1>');
-});
-
-app.post('/api/v1/products', (req, res) => {
-  console.log('Served a POST request');
-  const obj = JSON.stringify(req.body);
-  res.send(`Data received: ${obj}`);
+  res.send("Welcome to Prashin's Node API");
 });
 
 mongoose
